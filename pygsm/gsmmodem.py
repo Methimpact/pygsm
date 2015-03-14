@@ -236,7 +236,6 @@ class GsmModem(object):
 
         # set some sensible defaults, to make
         # the various modems more consistant
-        self.command("AT+",      raise_errors=False) # echo off
         self.command("ATE0",      raise_errors=False) # echo off
         if hasattr(self, "pin"):
             self.command("AT+CPIN="+str(self.pin), raise_errors=True) # useful error messages
