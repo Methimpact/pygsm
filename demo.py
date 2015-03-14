@@ -30,7 +30,7 @@ class CountLettersApp(object):
 # all arguments to GsmModem.__init__ are optional, and passed straight
 # along to pySerial. for many devices, this will be enough:
 gsm = GsmModem(
-    port="/dev/ttyUSB0",
+    port="/dev/ttyUSB0", pin="1234",
     logger=GsmModem.debug_logger).boot()
 
 
