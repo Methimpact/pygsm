@@ -76,7 +76,8 @@ class GsmModem(object):
 
         if "logger" in kwargs:
             self.logger = kwargs.pop("logger")
-
+        if "pin" in kwargs:
+            self.pin = kwargs.pop("pin")
         # if a ready-made device was provided, store it -- self.connect
         # will see that we're already connected, and do nothing. we'll
         # just assume it quacks like a serial port
@@ -235,7 +236,10 @@ class GsmModem(object):
 
         # set some sensible defaults, to make
         # the various modems more consistant
+        self.command("AT+",      raise_errors=False) # echo off
         self.command("ATE0",      raise_errors=False) # echo off
+        if hasattr(self, "pin"):
+            self.command("AT+CPIN="+str(self.pin), raise_errors=True) # useful error messages
         self.command("AT+CMEE=1", raise_errors=False) # useful error messages
         self.command("AT+WIND=0", raise_errors=False) # disable notifications
         self.command("AT+CMGF=1"                    ) # switch to TEXT mode
